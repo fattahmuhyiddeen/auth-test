@@ -1,14 +1,14 @@
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
-exports.login = (req, res, next)  => {
+exports.login = (req, res, next) => {
   passport.authenticate('login', async (err, user) => {
     try {
       if (err || !user) {
         res.status(401).json({ error: err || 'Wrong email or password' });
         return;
       }
-      req.login(user, { session: false }, async (error) => {
+      req.login(user, { session: false }, async error => {
         if (error) next(error);
         if (user.reset_token) user.update({ reset_token: null });
         const jwt_content = { uid: user.id, email: user.email };
@@ -20,7 +20,7 @@ exports.login = (req, res, next)  => {
       // next(error);
     }
   })(req, res, next);
-}
+};
 
 exports.register = (req, res, next) => {
   passport.authenticate('signup', { session: false }, async (err, user, info) => {
@@ -37,4 +37,4 @@ exports.register = (req, res, next) => {
       res.status(500).json({ error });
     }
   })(req, res, next);
-}
+};

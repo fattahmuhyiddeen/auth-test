@@ -24,9 +24,8 @@ exports.queryParameters = args => {
       [or]: sc.map(c => {
         const likeSymbol = config.dialect === 'postgres' ? iLike : like;
         //  TODO: temp solution for non postrgres
-        if (c === 'id' && config.dialect !== 'postgres') return {[c]: +keyword};
+        if (c === 'id' && config.dialect !== 'postgres') return { [c]: +keyword };
         //  TODO: end temp solution for non postrgres
-
 
         if (c === 'id') {
           if (!model_name) return { [c]: keyword };

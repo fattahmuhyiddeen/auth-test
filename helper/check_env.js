@@ -36,5 +36,4 @@ switch (process.env.NODE_ENV) {
 }
 if (!process.env.PROJECT_JWT_SECRET) {
   throw new Error(`Please set ${e} properly`);
-};
-
+}
