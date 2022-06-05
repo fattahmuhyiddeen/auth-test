@@ -56,7 +56,6 @@
     ]
   },
   "scripts": {
-    "test": "NODE_ENV=test nyc mocha --recursive --exit 'Test/**/*.test.js' && ./node_modules/.bin/eslint --fix --ignore-path .gitignore -f complexity .",
     "start": "npx nodemon",
     "sshheroku": "heroku ps:exec -a xla-interview",
     "restartheroku": "heroku restart -a auth-test",
@@ -67,7 +66,7 @@
     "url": "git+ssh://git@github.com/fattahmuhyiddeen/auth-test.git"
   },
   "keywords": [
-    "hilal-node"
+    "interview"
   ],
   "author": "Fattah",
   "bugs": {
