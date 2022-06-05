@@ -1,11 +1,7 @@
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const randtoken = require('rand-token');
-// const m = require('../models');
 
-const refreshTokens = {};
-
-function login(req, res, next) {
+exports.login = (req, res, next)  => {
   passport.authenticate('login', async (err, user) => {
     try {
       if (err || !user) {
@@ -15,13 +11,9 @@ function login(req, res, next) {
       req.login(user, { session: false }, async (error) => {
         if (error) next(error);
         if (user.reset_token) user.update({ reset_token: null });
-        const jwt_content = { uid: user.id, email: user.email, role: 'admin' };
-        // Sign the JWT token and populate the payload with the user email and id
-        // Send back the token to the user
+        const jwt_content = { uid: user.id, email: user.email };
         const token = jwt.sign(jwt_content, process.env.PROJECT_JWT_SECRET, { expiresIn: 86400 });
-        const refreshToken = randtoken.uid(256);
-        refreshTokens[refreshToken] = user.email;
-        res.json({ token, refreshToken });
+        res.json({ token });
       });
     } catch (e) {
       res.status(500).json({ error: e });
@@ -30,7 +22,7 @@ function login(req, res, next) {
   })(req, res, next);
 }
 
-function signup(req, res, next) {
+exports.register = (req, res, next) => {
   passport.authenticate('signup', { session: false }, async (err, user, info) => {
     try {
       if (err || !user) {
@@ -46,7 +38,3 @@ function signup(req, res, next) {
     }
   })(req, res, next);
 }
-
-module.exports = {
-  signup, login,
-};
