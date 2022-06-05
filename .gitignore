@@ -1,0 +1,7 @@
+.envrc
+.env
+node_modules
+tmp
+*.pdf
+package-lock.json
+playground.js

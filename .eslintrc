@@ -1,0 +1,14 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 2020,
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true
+        }
+    },
+    "rules": {
+        "prefer-arrow-callback": "off"
+    },
+    "env": {
+        "es6": true
+    }
+}
