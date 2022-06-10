@@ -1,7 +1,6 @@
 require('dotenv').config();
 require('./helper/check_env');
 const express = require('express');
-const fileUpload = require('express-fileupload');
 const middleware = require('./middleware');
 
 const app = express();
@@ -19,7 +18,6 @@ app.use(bodyParser.json());
 // for parsing application/xwww-
 app.use(bodyParser.urlencoded({ extended: false }));
 // for parsing multipart/form-data
-app.use(fileUpload(({ createParentPath: true, useTempFiles: true, tempFileDir: 'tmp' })));
 
 app.use(middleware.modifyResponseBody);
 app.use(express.static('public'));
@@ -36,6 +34,6 @@ app.use(require('morgan')('combined'));
 
 app.use('/', routes);
 
-app.listen(PORT, () => console.log(`Listening at ${PORT} at ${process.env.DOMAIN}`));
+app.listen(PORT, () => console.log(`Listening at ${PORT}`));
 
 module.exports = app;
